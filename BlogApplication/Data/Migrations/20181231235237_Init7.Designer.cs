@@ -4,14 +4,16 @@ using BlogApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlogApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181231235237_Init7")]
+    partial class Init7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,13 +71,9 @@ namespace BlogApplication.Data.Migrations
 
                     b.Property<string>("Author");
 
-                    b.Property<string>("Categories");
-
                     b.Property<string>("Content");
 
                     b.Property<DateTime>("CreateTime");
-
-                    b.Property<string>("Introduction");
 
                     b.Property<string>("Title");
 

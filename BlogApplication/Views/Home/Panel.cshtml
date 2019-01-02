@@ -1,22 +1,54 @@
-﻿@model IEnumerable<Post>
+﻿@model IEnumerable<BlogApplication.Models.Post>
+
 @{
     ViewData["Title"] = "Admin Panel";
 }
-<h2>@ViewData["Title"]</h2>
 
-<div>
-    <ul>
-        @foreach(var post in Model)
+<h2>PanelTest</h2>
+
+<p>
+    <a asp-action="CreatePost">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
-            <li>
-                <p>
-                    @post.Title
-                    @post.PostId
-                    -
-                    <a asp-controller="Home" asp-action="EditPost" asp-route-id="@post.PostId">edit</a>
-                    <a asp-controller="Home" asp-action="RemovePost" asp-route-id="@post.PostId">remove</a>
-                </p>
-            </li>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    <a asp-action="EditPost" asp-route-id="@item.PostId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
+                    <a asp-action="RemovePost" asp-route-id="@item.PostId">Delete</a>
+                </td>
+            </tr>
         }
-    </ul>
-</div>
+    </tbody>
+</table>

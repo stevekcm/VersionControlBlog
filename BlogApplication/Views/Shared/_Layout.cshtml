@@ -15,6 +15,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link href="~/lib/ionicons/ionicons.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -26,16 +27,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BlogApplication</a>
+                <a asp-area="" asp-controller="Home" asp-action="Post" class="navbar-brand">BlogApplication</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Post">Blog</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Post">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="CreatePost">Create Post</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="PanelTest">Panel</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Panel">Panel</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -46,10 +44,8 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - BlogApplication</p>
-        </footer>
+       
+
     </div>
 
     <environment include="Development">

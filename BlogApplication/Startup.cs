@@ -44,6 +44,11 @@ namespace BlogApplication
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IRepository, Repository>();
+
+            services.AddAuthentication(options =>
+            {
+               
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +75,7 @@ namespace BlogApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Post}/{id?}");
             });
         }
     }

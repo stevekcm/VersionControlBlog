@@ -12,6 +12,7 @@ using BlogApplication.Models.Comment;
 
 namespace BlogApplication.Controllers
 {
+
     public class HomeController : Controller
     {
         private IRepository _repository;
@@ -26,10 +27,12 @@ namespace BlogApplication.Controllers
             
         }
 
+
         public IActionResult Index()
         {
             return View();
         }
+
 
         public IActionResult About()
         {
@@ -37,12 +40,14 @@ namespace BlogApplication.Controllers
             return View();
         }
 
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
             return View();
         }
 
+   
         public IActionResult Privacy()
         {
             return View();
@@ -64,7 +69,7 @@ namespace BlogApplication.Controllers
         /// </summary>
         /// <returns>Post action method</returns>
         //[Authorize(Policy = "Admin")]
-        public IActionResult PanelTest()
+        public IActionResult Panel()
         {           
             return Post();
         }
@@ -116,16 +121,18 @@ namespace BlogApplication.Controllers
         /// This action method gives a view CreatePost
         /// </summary>
         /// <returns>new post</returns>
+
         [HttpGet]
         public IActionResult CreatePost()
         {
            return View(new Post());
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Comment(CommentViewModel cvm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return RedirectToAction("Post", new { id = cvm.PostId });
 
             var post = _repository.GetPost(cvm.PostId);
@@ -138,6 +145,7 @@ namespace BlogApplication.Controllers
                 {
                     Message = cvm.Message,
                     CreatedTime = DateTime.Now,
+                    Author = User.Identity.Name,
 
                 });
 
@@ -150,14 +158,16 @@ namespace BlogApplication.Controllers
                     MainCommentId = cvm.MainCommentId,
                     Message = cvm.Message,
                     CreatedTime = DateTime.Now,
+                    Author = User.Identity.Name,
                 };
+                _repository.AddSubComment(comment);
 
             }
 
             await _repository.SaveChangesAsync();
 
 
-            return View();
+            return RedirectToAction("Details", new { id = cvm.PostId });
         }
 
         /// <summary>
@@ -184,6 +194,7 @@ namespace BlogApplication.Controllers
         /// <param name="post">The post</param>
         /// <returns></returns>
         //[Authorize(Policy = "Admin")]
+
         public async Task<IActionResult> RemovePost(int? id , Post post)
         {
             post = _repository.GetPost(id);
@@ -192,10 +203,17 @@ namespace BlogApplication.Controllers
             return RedirectToAction("PanelTest");
         }
 
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+  
+        public IActionResult Details(int? id)
+        {
+            return View(_repository.GetPost(id));
         }
     }
 }

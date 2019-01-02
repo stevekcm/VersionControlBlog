@@ -1,15 +1,67 @@
 ﻿@model CommentViewModel
 
-@{ 
+@{
 
 }
 
-<div>
-    <form method="post" asp-controller="Home" asp-action="Comment">
-        <input asp-for="PostId" type="hidden"/>
-        <input asp-for="MainCommentId" type="hidden"/>
-        <input asp-for="Message" />
-        <button type="submit">Enter</button>
 
-    </form>
-</div>
+<head>
+    <meta charset="UTF-8">
+
+
+    <!-- Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/ionicons/ionicons.css" rel="stylesheet" />
+
+    <link href="~/css/details/responsive.css" rel="stylesheet" />
+    <link href="~/css/details/styles.css" rel="stylesheet" />
+
+</head>
+
+    
+<div class="container">
+    
+
+    <h4><b>POST COMMENT</b></h4>
+    <div class="row">
+
+        <div class="col-lg-2 col-md-0"></div>
+
+        <div class="col-lg-8 col-md-12">
+            <div class="comment-form">
+                <form method="post" asp-action="Comment">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input asp-for="PostId" type="hidden" />
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <input asp-for="MainCommentId" type="hidden" />
+                        </div><!-- col-sm-6 -->
+                        @*<div class="col-sm-6">
+                            <input asp-for="Author" type="hidden" />
+                        </div>*@<!-- col-sm-6 -->
+
+                        <div class="col-sm-12">
+                            <textarea rows="2" class="text-area-messge form-control"
+                                      placeholder="Enter your comment" aria-required="true" aria-invalid="false" asp-for="Message"></textarea>
+                        </div><!-- col-sm-12 -->
+                        <div class="col-sm-12">
+                            <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                        </div><!-- col-sm-12 -->
+
+                    </div><!-- row -->
+                </form>
+            </div><!-- comment-form -->
+
+        </div><!-- col-lg-8 col-md-12 -->
+
+    </div><!-- row -->
+
+</div><!-- container -->
+   
+

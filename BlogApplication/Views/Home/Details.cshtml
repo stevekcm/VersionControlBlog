@@ -41,14 +41,14 @@
 
                         <div class="post-top-area">
 
-                            <h5 class="pre-title">TODO : categories</h5>
+                            <h5 class="pre-title">@Html.DisplayFor(model => model.Categories)</h5>
 
                             <h3 class="title"><a href="#"><b>@Html.DisplayFor(model => model.Title)</b></a></h3>
 
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">
@@ -79,14 +79,14 @@
                                 <ul class="icons">
                                     <li>SHARE : </li>
                                     <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-                                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>                                  
+                                    <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
                                 </ul>
                             </div>
 
                             <div class="post-footer post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">
@@ -104,7 +104,10 @@
         </div><!-- container -->
     </section><!-- post-area -->
 
+
+
     <section class="comment-section center-text">
+        <p>	&#160;</p>
         @{
             await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.PostId, MainCommentId = 0 });
         }
@@ -113,64 +116,84 @@
 
         @foreach (var comment in Model.MainComments)
         {
-        <div class="commnets-area text-left">
+            <div class="commnets-area text-left" >
 
-            <div class="comment">
+                <div class="comment">
 
-                <div class="post-info">
+                    <div class="post-info">
 
-                    <div class="left-area">
-                        <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                        <div class="left-area">
+                            <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
+                        </div>
+
+                        <div class="middle-area">
+                            <a class="name" href="#"><b>@comment.Author</b></a>
+                            <h6 class="date">on @comment.CreatedTime </h6>
+                        </div>
+
+                        <div class="right-area">
+                            <h5 class="reply-btn" onclick="replyFunction(@comment.Id)" style="cursor: pointer;"><b>REPLY</b></h5>
+                        </div>
+
+                    </div><!-- post-info -->
+
+                    <p >
+                        @comment.Message
+                    </p>
+
+                </div>
+
+                <div id="@comment.Id" style="display: none;">
+                    @{
+                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.PostId, MainCommentId = comment.Id });
+                    }
+
+                </div>
+                        
+                        
+        
+
+
+                @foreach (var sc in comment.SubComments)
+                {
+
+
+
+                    <div class="comment">
+
+
+                        <div class="post-info">
+
+                            <div class="left-area">
+                                <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
+                            </div>
+
+                            <div class="middle-area">
+                                <a class="name" href="#"><b>@comment.Author</b></a>
+                                <h6 class="date">on @sc.CreatedTime</h6>
+                            </div>
+
+
+                        </div><!-- post-info -->
+
+                        <p>
+                            @sc.Message
+                        </p>
+
                     </div>
-
-                    <div class="middle-area">
-                        <a class="name" href="#"><b>@comment.Author</b></a>
-                        <h6 class="date">on @comment.CreatedTime </h6>
-                    </div>
-
-                    <div class="right-area">
-                        <h5 class="reply-btn"><a href="#"><b>REPLY</b></a></h5>
-                    </div>
-
-                </div><!-- post-info -->
-
-                <p>
-                    @comment.Message
-                </p>
-
+                }
             </div>
-
-           
-            @foreach (var sc in comment.SubComments)
-            {
-            <div class="comment">
-
-               
-                <div class="post-info">
-
-                    <div class="left-area">
-                        <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                    </div>
-
-                    <div class="middle-area">
-                        <a class="name" href="#"><b>@comment.Author</b></a>
-                        <h6 class="date">on @sc.CreatedTime</h6>
-                    </div>
-
-                    <div class="right-area">
-                        <h5 class="reply-btn"><a href="#"><b></b></a></h5>
-                    </div>
-
-                </div><!-- post-info -->
-
-                <p>
-                    @sc.Message
-                </p>
-
-            </div>
-            }
-        </div>
         }
     </section>
     <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
+    <script>
+        function replyFunction(i) {
+            var x = document.getElementById(i);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 </body>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Post";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <ul>
+        @foreach (var post in Model) 
+        {
+            <li>
+                <h2>
+                    @post.Title
+                </h2>
+                <p>
+                    @post.Author
+                </p>
+                <p>
+                    @post.CreateTime
+                </p>
+                <p>
+                    @post.Content
+                </p>
+            </li>
+        }
+       
+    </ul>
+    <div class="comment-section">
+        
+        @foreach (var comment in Model)
+        {
+            var id = comment.PostId;
+            await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = id, MainCommentId = 0 });
+        }
+  
+        @foreach (var c in Model)
+        {
+            var message = c.MainComments.comment;
+              
+                @c.MainComments.Message --- @c.MainComments.Cre
+            
+
+            
+        }
+    </div>
+</div>

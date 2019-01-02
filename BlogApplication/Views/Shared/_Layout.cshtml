@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BlogApplication</title>
+    <link rel="stylesheet" href="~/css/sidenav.css" />
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,37 +17,46 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link href="~/lib/ionicons/ionicons.css" rel="stylesheet" />
+
+    
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Post" class="navbar-brand">BlogApplication</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Post">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="CreatePost">Create Post</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Panel">Panel</a></li>
-                </ul>
+
+    <div id="mySidenav" class="sidenav" style="z-index:2;">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a asp-area="" asp-controller="Home" asp-action="Post">Home</a>
+        <a asp-area="" asp-controller="Home" asp-action="CreatePost">Create Post</a>
+        <a asp-area="" asp-controller="Home" asp-action="Panel">Panel</a>
+    </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:1; ">
+            <div class="container">
                 <partial name="_LoginPartial" />
+                <a class="navbar-brand" onclick="openNav()" style="cursor:pointer;">&#9776;</a>
             </div>
-        </div>
-    </nav>
+     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @RenderBody()
-       
-
+    <div class="body-content" id="main" style="background: white;">
+        <div class="container" style="background: white;">@RenderBody()</div>
     </div>
+
+    <script>
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(255,255,255,1)";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.body.style.backgroundColor = "rgba(255,255,255,1)";
+        }
+    </script>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -68,7 +78,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+    <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

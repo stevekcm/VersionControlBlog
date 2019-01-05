@@ -12,7 +12,8 @@ using BlogApplication.Models.Comment;
 
 namespace BlogApplication.Controllers
 {
-
+    [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
         private IRepository _repository;
@@ -28,35 +29,36 @@ namespace BlogApplication.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-            return View();
-        }
+        //public IActionResult About()
+        //{
+        //    ViewData["Message"] = "Your application description page.";
+        //    return View();
+        //}
 
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-            return View();
-        }
+        //public IActionResult Contact()
+        //{
+        //    ViewData["Message"] = "Your contact page.";
+        //    return View();
+        //}
 
    
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         /// <summary>
         /// This action method uses the get all post from repository , and display all the post in view Post
         /// </summary>
-        /// <returns>A view with List of posts</returns>        
+        /// <returns>A view with List of posts</returns>    
+        [AllowAnonymous]
         public IActionResult Post()
         {
             var posts = _repository.GetAllPosts();
@@ -68,7 +70,7 @@ namespace BlogApplication.Controllers
         /// Admin only 
         /// </summary>
         /// <returns>Post action method</returns>
-        //[Authorize(Policy = "Admin")]
+        [Authorize("Panel")]
         public IActionResult Panel()
         {           
             return Post();
@@ -80,6 +82,7 @@ namespace BlogApplication.Controllers
         /// <param name="id">Post Id</param>
         /// <returns>if the Post id is nothing then redirect the page to the Post page, otherwise pass the id</returns>
         [HttpGet]
+        [Authorize("Edit Post")]
         public IActionResult EditPost(int? id)
         {
             if (id == null)
@@ -102,6 +105,7 @@ namespace BlogApplication.Controllers
         /// <returns>if the the post id doesnt match redirect to post page , otherwise update post save changes and redirect to post page </returns>
         [HttpPost]
         //[Authorize(Policy = "Admin")]
+        [Authorize("Edit Post")]
         public async Task<IActionResult> EditPost(int id, Post post)
         {
             if (id != post.PostId)
@@ -123,6 +127,7 @@ namespace BlogApplication.Controllers
         /// <returns>new post</returns>
 
         [HttpGet]
+        [Authorize("Create Post")]
         public IActionResult CreatePost()
         {
            return View(new Post());
@@ -130,6 +135,7 @@ namespace BlogApplication.Controllers
 
 
         [HttpPost]
+        [Authorize("Comment")]
         public async Task<IActionResult> Comment(CommentViewModel cvm)
         {
             if (!ModelState.IsValid)
@@ -178,6 +184,7 @@ namespace BlogApplication.Controllers
         /// <returns>Redirect to Post page</returns>
         [HttpPost]
         //[Authorize(Policy = "Admin")]
+        [Authorize("Create Post")]
         public async Task<IActionResult> CreatePost(Post post)
         {
             post.Author = User.Identity.Name;
@@ -194,13 +201,13 @@ namespace BlogApplication.Controllers
         /// <param name="post">The post</param>
         /// <returns></returns>
         //[Authorize(Policy = "Admin")]
-
+        [Authorize("Remove Post")]
         public async Task<IActionResult> RemovePost(int? id , Post post)
         {
             post = _repository.GetPost(id);
             _repository.RemovePost(post);
             await _repository.SaveChangesAsync();
-            return RedirectToAction("PanelTest");
+            return RedirectToAction("Panel");
         }
 
 
@@ -210,7 +217,7 @@ namespace BlogApplication.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-  
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             return View(_repository.GetPost(id));

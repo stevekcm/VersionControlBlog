@@ -66,7 +66,7 @@ h6 {
 a, button {
     display: inline-block;
     text-decoration: none;
-    color: inherit;
+    color: #fff;
     transition: all .3s;
 }
 

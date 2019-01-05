@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -17,6 +18,7 @@ namespace BlogApplication.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
@@ -83,6 +85,15 @@ namespace BlogApplication.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.UserName, Email = Input.Email   };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                //Set all new user to member
+                await _userManager.AddToRoleAsync(user, "Member");
+                var role = await _roleManager.FindByNameAsync("Member");
+                var storedClaim = await _roleManager.GetClaimsAsync(role);
+                foreach (var item in storedClaim)
+                {
+                    await _userManager.AddClaimAsync(user, new Claim(item.Type, item.Value));
+                }
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

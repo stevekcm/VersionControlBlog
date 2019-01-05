@@ -39,20 +39,30 @@ namespace BlogApplication
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            }
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IRepository, Repository>();
 
-            services.AddAuthentication(options =>
+            services.AddAuthorization(options =>
             {
-               
+                options.AddPolicy("Create Post", policy => policy.RequireClaim("Create Post", "accepted"));
+                options.AddPolicy("Panel", policy => policy.RequireClaim("Panel", "accepted"));
+                options.AddPolicy("Edit Post", policy => policy.RequireClaim("Edit Post", "accepted"));
+                options.AddPolicy("View Post", policy => policy.RequireClaim("View Post", "accepted"));
+                options.AddPolicy("Comment", policy => policy.RequireClaim("Comment", "accepted"));
+                options.AddPolicy("Remove Post", policy => policy.RequireClaim("Remove Post", "accepted"));
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +80,7 @@ namespace BlogApplication
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            DbSeeder.SeedDb(userManager, roleManager);
 
             app.UseMvc(routes =>
             {

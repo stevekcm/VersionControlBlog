@@ -24,9 +24,9 @@
 
     <div id="mySidenav" class="sidenav" style="z-index:2;">
         <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-        <a asp-area="" asp-controller="Home" asp-action="Post">Home</a>
-        <a asp-area="" asp-controller="Home" asp-action="CreatePost">Create Post</a>
-        <a asp-area="" asp-controller="Home" asp-action="Panel">Panel</a>
+        <a asp-area="" asp-controller="Home" asp-action="Post"><ion-icon name="home"></ion-icon> Home</a>
+        <a asp-area="" asp-controller="Home" asp-action="CreatePost"><ion-icon name="add-circle"></ion-icon> Create Post</a>
+        <a asp-area="" asp-controller="Home" asp-action="Panel"><ion-icon name="person"></ion-icon> Panel</a>
     </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" style="z-index:1; ">
@@ -80,5 +80,6 @@
     </environment>
     <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

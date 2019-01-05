@@ -11,8 +11,10 @@
 
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/css/index/abc.css" rel="stylesheet" />
+    <link href="~/css/index/main.css" rel="stylesheet" />
     <link href="~/css/index/responsive1.css" rel="stylesheet" />
+
+
 
 
 
@@ -45,20 +47,20 @@
                                                             <p>
                                                                 @post.Introduction
                                                             </p>
+                                                            <p>	&#160;</p>
+                                                            @*<div class="avatar-area">
+        <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
+        <div class="right-area">*@
+                                                            <a class="name" href="#"><b>@post.Author</b></a>
+                                                            <h6 class="date" href="#">on @post.CreateTime</h6>
+                                                            @*</div>
+        </div>
 
-                                                            <div class="avatar-area">
-                                                                @*<a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>*@
-                                                                @*<div class="right-area">*@
-                                                                    <a class="name" href="#"><b>@post.Author</b></a>
-                                                                    <h6 class="date" href="#">on @post.CreateTime</h6>
-                                                                @*</div>*@
-                                                            </div>
-
-                                                            @*<ul class="title">*@
-                                                                @*<li><a href="#"><ion-icon name="heart"></ion-icon>12</a></li>*@
-                                                                @*<li><a href="#"><ion-icon name="chatbubbles"></ion-icon>  12</a></li>*@
-                                                                @*<li><a href="#"><ion-icon name="eye"></ion-icon>12</a></li>*@
-                                                            @*</ul>*@
+        <ul class="post-footer">
+            <li><a href="#"><ion-icon name="heart"></ion-icon>12</a></li>
+            <li><a href="#"><ion-icon name="chatbubbles"></ion-icon>12</a></li>
+            <li><a href="#"><ion-icon name="eye"></ion-icon>12</a></li>
+        </ul>*@
 
                                                         </div><!-- blog-right -->
 

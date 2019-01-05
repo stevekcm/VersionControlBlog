@@ -7,65 +7,13 @@
 <head>
     <meta charset="UTF-8">
 
-
     <!-- Font -->
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
     <!-- Stylesheets -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/lib/ionicons/ionicons.css" rel="stylesheet" />
     <link href="~/css/details/responsive.css" rel="stylesheet" />
-    <link href="~/css/details/styles.css" rel="stylesheet" />
-
-    <style>
-        body, input, select, textarea {
-            color: #646464;
-            font-family: "Source Sans Pro", Helvetica, sans-serif;
-            font-size: 14pt;
-            font-weight: 400;
-            line-height: 1.75;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: #3c3b3b;
-            font-family: "Raleway", Helvetica, sans-serif;
-            font-weight: 800;
-            letter-spacing: 0.25em;
-            line-height: 1.65;
-            margin: 0 0 1em 0;
-            text-transform: uppercase;
-        }
-
-            h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-                color: inherit;
-                border-bottom: 0;
-            }
-
-        h2 {
-            font-size: 1.1em;
-        }
-
-        h3 {
-            font-size: 0.9em;
-        }
-
-        h4 {
-            font-size: 0.7em;
-        }
-
-        h5 {
-            font-size: 0.7em;
-        }
-
-        h6 {
-            font-size: 0.7em;
-        }
-
-        
-    </style>
-
+    <link href="~/css/details/details.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -98,10 +46,10 @@
                                     <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
                                 </div>*@
 
-                                <div class="left-area">
+                                @*<div class="middle-area">
                                     <a class="name" href="#"><b>@Html.DisplayFor(model => model.Author)</b></a>
                                     <h6 class="date">on @Html.DisplayFor(model => model.CreateTime)</h6>
-                                </div>
+                                </div>*@
 
                             </div><!-- post-info -->
 
@@ -113,10 +61,10 @@
 
 
 
-                        @*<div class="post-bottom-area">
+                        <div class="post-bottom-area">
 
 
-                            <div class="post-icons-area">
+                            @*<div class="post-icons-area">
                                 <ul class="post-icons">
                                     <li><a href="#"><ion-icon name="heart"></ion-icon>TODO : LIKED</a></li>
                                     <li><a href="#"><ion-icon name="chatbubbles"></ion-icon>TODO : COMMENTS</a></li>
@@ -128,13 +76,13 @@
                                     <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
                                     <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
                                 </ul>
-                            </div>
+                            </div>*@
 
                             <div class="post-footer post-info">
 
-                                <div class="left-area">
+                                @*<div class="left-area">
                                     <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
-                                </div>
+                                </div>*@
 
                                 <div class="middle-area">
                                     <a class="name" href="#"><b>@Html.DisplayFor(model => model.Author)</b></a>
@@ -143,7 +91,7 @@
 
                             </div><!-- post-info -->
 
-                        </div><!-- post-bottom-area -->*@
+                        </div><!-- post-bottom-area -->
 
                     </div><!-- main-post -->
                 </div><!-- col-lg-8 col-md-12 -->
@@ -159,7 +107,7 @@
             await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.PostId, MainCommentId = 0 });
         }
 
-        <h4><b>COMMENTS(TODO : TOTAL COMMENTS NUMBER)</b></h4>
+        <h4><b>COMMENTS</b></h4>
 
         @foreach (var comment in Model.MainComments)
         {
@@ -169,13 +117,15 @@
 
                 <div class="post-info">
 
-                    <div class="left-area">
+                    @*<div class="left-area">
                         <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
-                    </div>
+                    </div>*@
 
                     <div class="middle-area">
                         <a class="name" href="#"><b>@comment.Author</b></a>
-                        <h6 class="date">on @comment.CreatedTime </h6>
+                        <h6 class="date">on @comment.CreatedTime </h6><br />
+                        <p>	&#160;</p>
+                        @comment.Message
                     </div>
 
                     <div class="right-area">
@@ -184,9 +134,9 @@
 
                 </div><!-- post-info -->
 
-                <p>
+                @*<p>
                     @comment.Message
-                </p>
+                </p>*@
 
             </div>
 
@@ -210,21 +160,23 @@
 
                     <div class="post-info">
 
-                        <div class="left-area">
+                        @*<div class="left-area">
                             <a class="avatar" href="#"><img src="~/images/DefaultIcon.png" alt="Profile Image"></a>
-                        </div>
+                        </div>*@
 
                         <div class="middle-area">
                             <a class="name" href="#"><b>@sc.Author</b></a>
                             <h6 class="date">on @sc.CreatedTime</h6>
+                            <p>	&#160;</p>
+                            @comment.Message
                         </div>
 
 
                     </div><!-- post-info -->
 
-                    <p>
+                    @*<p>
                         @sc.Message
-                    </p>
+                    </p>*@
 
                 </div>
             }

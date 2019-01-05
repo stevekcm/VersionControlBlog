@@ -25,11 +25,13 @@ namespace BlogApplication.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -85,6 +87,7 @@ namespace BlogApplication.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.UserName, Email = Input.Email   };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 //Set all new user to member
                 await _userManager.AddToRoleAsync(user, "Member");
                 var role = await _roleManager.FindByNameAsync("Member");

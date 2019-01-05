@@ -4,19 +4,41 @@
     ViewData["Title"] = "Admin Panel";
 }
 
-<h2>PanelTest</h2>
+<head>
+    <meta charset="UTF-8">
+
+
+    <!-- Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/details/responsive.css" rel="stylesheet" />
+    <link href="~/css/details/styles.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: white
+        }
+    </style>
+</head>
+
+<p>	&#160;</p>
+
 
 <p>
-    <a asp-action="CreatePost">Create New</a>
+    <a asp-action="CreatePost"><ion-icon name="add-circle"></ion-icon>Create Post</a>
 </p>
+
+<p>	&#160;</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreateTime)
@@ -35,20 +57,18 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.CreateTime)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
                 <td>
-                    <a asp-action="EditPost" asp-route-id="@item.PostId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PostId">Details</a> |
-                    <a asp-action="RemovePost" asp-route-id="@item.PostId">Delete</a>
+                    <a asp-action="EditPost" asp-route-id="@item.PostId"><ion-icon name="document"></ion-icon>Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PostId"><ion-icon name="paper"></ion-icon>Details</a> |
+                    <a asp-action="RemovePost" asp-route-id="@item.PostId"><ion-icon name="trash"></ion-icon>Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>

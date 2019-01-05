@@ -53,10 +53,37 @@ namespace BlogApplication
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Create Post", policy => policy.RequireClaim("Create Post", "accepted"));
+   
+            });
+            services.AddAuthorization(options =>
+            {
+               
                 options.AddPolicy("Panel", policy => policy.RequireClaim("Panel", "accepted"));
+               
+            });
+            services.AddAuthorization(options =>
+            {
+               
                 options.AddPolicy("Edit Post", policy => policy.RequireClaim("Edit Post", "accepted"));
+                
+            });
+            services.AddAuthorization(options =>
+            {
+               
                 options.AddPolicy("View Post", policy => policy.RequireClaim("View Post", "accepted"));
+             
+            });
+
+            services.AddAuthorization(options =>
+            {
+              
                 options.AddPolicy("Comment", policy => policy.RequireClaim("Comment", "accepted"));
+              
+            });
+
+            services.AddAuthorization(options =>
+            {
+               
                 options.AddPolicy("Remove Post", policy => policy.RequireClaim("Remove Post", "accepted"));
             });
         }

@@ -98,12 +98,6 @@ header {
     font-weight: 400;
 }
 
-
-
-/* ---------------------------------
-2. COMMONS FOR PAGE DESIGN
---------------------------------- */
-
 .section {
     padding: 70px 0 40px;
 }
@@ -174,12 +168,6 @@ header {
     letter-spacing: 1px;
 }
 
-
-
-/* ---------------------------------
-3. MENU
---------------------------------- */
-
 header {
     overflow: hidden;
     background: #fff;
@@ -227,10 +215,6 @@ header {
         display: block;
     }
 
-
-
-    /* SEARCH AREA */
-
     header .src-area {
         position: relative;
         height: 60px;
@@ -273,9 +257,6 @@ header {
             z-index: 10;
         }
 
-
-/* NAV ICON */
-
 .menu-nav-icon {
     display: none;
     height: 60px;
@@ -288,23 +269,12 @@ header {
     font-size: 1.8em;
 }
 
-
-/* ---------------------------------
-4. SLIDER
---------------------------------- */
-
 .slider {
     height: 400px;
     width: 100%;
     background-image: url(../../images/slider-1-1600x900.jpg);
     background-size: cover;
 }
-
-
-
-/* ---------------------------------
-5. BLOG POST
---------------------------------- */
 
 .post-area .post-info {
     position: relative;
@@ -337,10 +307,6 @@ header {
         float: right;
     }
 
-
-/* ---------------------------------
-6. MAIN POST
---------------------------------- */
 
 .main-post {
     margin-top: -100px;
@@ -385,9 +351,6 @@ header {
                 background: none;
             }
 
-
-    /* ICONS */
-
     .main-post .post-icons-area {
         margin: 30px 0;
         padding: 30px 0;
@@ -420,9 +383,6 @@ header {
             opacity: .5;
         }
 
-
-    /* POST FOOTER */
-
     .main-post .post-footer.post-info {
         margin-top: 30px;
         padding-right: 30px;
@@ -431,12 +391,6 @@ header {
     .main-post .post-footer {
         margin-bottom: 30px;
     }
-
-
-
-/* ---------------------------------
-7. RECOMENEDED AREA
---------------------------------- */
 
 .recomended-area .row div[class^="col"] {
     margin-bottom: 30px;
@@ -510,12 +464,6 @@ header {
         font-size: 1.1em;
     }
 
-
-
-/* ---------------------------------
-8. POST COMMENT
---------------------------------- */
-
 .comment-form {
     margin: 30px 0;
     padding: 30px;
@@ -557,8 +505,6 @@ header {
         .comment-form .submit-btn:hover {
             background: none;
         }
-
-/* COMMENTS */
 
 .commnets-area {
     padding: 30px 40px;

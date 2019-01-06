@@ -44,8 +44,6 @@ namespace BlogApplication.Data
                 await userManager.CreateAsync(identityUser, _password);
                 await AddUserToRole(identityUser, userManager, role);
                 await SeedClaim(identityUser, roleManager, userManager, role);
-
-
             }
         }
 

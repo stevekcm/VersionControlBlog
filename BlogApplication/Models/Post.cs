@@ -12,14 +12,19 @@ namespace BlogApplication.Models
     
     public class Post 
     {
+        [Required]
         public int PostId { get; set; }
 
+        [Required, MinLength(2), MaxLength(100)]
         public string Title { get; set; }
 
+        [Required, MinLength(2), MaxLength(100)]
         public string Categories { get; set; }
 
+        [Required, MinLength(2), MaxLength(500)]
         public string Introduction { get; set; }
 
+        [Required, MinLength(2)]
         public string Content { get; set; }
 
         public DateTime CreateTime { get; set; } = DateTime.Now;

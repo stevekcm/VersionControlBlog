@@ -17,11 +17,7 @@
 </head>
 
 <body>
-
-
-
     <div class="slider">
-
     </div><!-- slider -->
 
     <section class="post-area">
@@ -64,45 +60,45 @@
 
         @foreach (var comment in Model.MainComments)
         {
-        <div class="commnets-area text-left">
-            <div class="comment">
-                <div class="post-info">
-                    <div class="middle-area">
-                        <a class="name" href="#"><b>@comment.Author</b></a>
-                        <h6 class="date">on @comment.CreatedTime </h6><br />
-                        <p>	&#160;</p>
-                        @comment.Message
-                    </div>
-
-                    <div class="right-area">
-                        <h5 class="reply-btn" onclick="replyFunction(@comment.Id)" style="cursor: pointer;"><b>REPLY</b></h5>
-                    </div>
-
-                </div><!-- post-info -->
-
-            </div>
-
-            <div id="@comment.Id" style="display: none;">
-                @{
-                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.PostId, MainCommentId = comment.Id });
-                }
-
-            </div>
-                
-            @foreach (var sc in comment.SubComments)
-            {
+            <div class="commnets-area text-left">
                 <div class="comment">
                     <div class="post-info">
                         <div class="middle-area">
-                            <a class="name" href="#"><b>@sc.Author</b></a>
-                            <h6 class="date">on @sc.CreatedTime</h6>
+                            <a class="name" href="#"><b>@comment.Author</b></a>
+                            <h6 class="date">on @comment.CreatedTime </h6><br />
                             <p>	&#160;</p>
                             @comment.Message
                         </div>
+
+                        <div class="right-area">
+                            <h5 class="reply-btn" onclick="replyFunction(@comment.Id)" style="cursor: pointer;"><b>REPLY</b></h5>
+                        </div>
+
                     </div><!-- post-info -->
+
                 </div>
-            }
-        </div>
+
+                <div id="@comment.Id" style="display: none;">
+                    @{
+                        await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.PostId, MainCommentId = comment.Id });
+                    }
+
+                </div>
+
+                @foreach (var sc in comment.SubComments)
+                {
+                    <div class="comment">
+                        <div class="post-info">
+                            <div class="middle-area">
+                                <a class="name" href="#"><b>@sc.Author</b></a>
+                                <h6 class="date">on @sc.CreatedTime</h6>
+                                <p>	&#160;</p>
+                                @comment.Message
+                            </div>
+                        </div><!-- post-info -->
+                    </div>
+                }
+            </div>
         }
     </section>
     <script src="https://unpkg.com/ionicons@4.5.0/dist/ionicons.js"></script>
@@ -116,4 +112,7 @@
             }
         }
     </script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>

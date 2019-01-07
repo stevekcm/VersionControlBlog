@@ -9,6 +9,8 @@ Customer2@email.com - Memeber
 Customer3@email.com - Memeber
 Customer4@email.com - Memeber 
 Customer5@email.com - Memeber
+Passwords
+Password123!
 ```
 
 

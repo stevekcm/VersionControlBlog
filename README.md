@@ -1,10 +1,6 @@
 # Blog Application
 > Featuring basic blog features, Creating/Viewing Post and comment
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 ```
 Default Accounts
 Member1@email.com - Admin

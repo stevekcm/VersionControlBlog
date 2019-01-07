@@ -25,7 +25,7 @@ Startup BlogApplication.Sin with Visual Studio 2017 with C# , .net core 2.1 and 
 
 ## Meta
 
-Your Name – Steve Kwok (stevekwokchunman@icloud.com)
+Steve Kwok (stevekwokchunman@icloud.com)
 
 
 [https://github.com/stevekwokdev](https://github.com/dbader/)
